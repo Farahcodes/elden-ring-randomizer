@@ -58,12 +58,12 @@ def charger_donnees(_=None):
     df_magic.columns = [c.strip() for c in df_magic.columns]
     df_armor.columns = [c.strip() for c in df_armor.columns]
 
-    df_main_hand = df_main_hand.applymap(lambda x: x.strip() if isinstance(x, str) else x)
-    df_second_hand = df_second_hand.applymap(lambda x: x.strip() if isinstance(x, str) else x)
-    df_magic = df_magic.applymap(lambda x: x.strip() if isinstance(x, str) else x)
-    df_armor = df_armor.applymap(lambda x: x.strip() if isinstance(x, str) else x)
-    df_spirits = df_spirits.applymap(lambda x: x.strip() if isinstance(x, str) else x) if not df_spirits.empty else df_spirits
-    df_tools = df_tools.applymap(lambda x: x.strip() if isinstance(x, str) else x) if df_tools is not None else pd.DataFrame(columns=['Tool'])
+    df_main_hand = df_main_hand.apply(lambda col: col.map(lambda x: x.strip() if isinstance(x, str) else x))
+    df_second_hand = df_second_hand.apply(lambda col: col.map(lambda x: x.strip() if isinstance(x, str) else x))
+    df_magic = df_magic.apply(lambda col: col.map(lambda x: x.strip() if isinstance(x, str) else x))
+    df_armor = df_armor.apply(lambda col: col.map(lambda x: x.strip() if isinstance(x, str) else x))
+    df_spirits = df_spirits.apply(lambda col: col.map(lambda x: x.strip() if isinstance(x, str) else x)) if not df_spirits.empty else df_spirits
+    df_tools = df_tools.apply(lambda col: col.map(lambda x: x.strip() if isinstance(x, str) else x)) if df_tools is not None else pd.DataFrame(columns=['Tool'])
 
     df_main_hand = df_main_hand[df_main_hand['leveled'].apply(_to_yes)]
     df_main_hand = df_main_hand[df_main_hand['Weapon'].astype(bool)].copy()
