@@ -1,199 +1,270 @@
-import pandas as pd
-import random
-import streamlit as st
 import os
 import sys
+import random
+
+import pandas as pd
+import streamlit as st
 
 # =============================================================================
 # 1. LOGIQUE (BACKEND)
 # =============================================================================
 
-def charger_donnees(chemin_fichier):
-    """
-    Charge les données.
-    Gestion des chemins pour que ça marche aussi bien en .py qu'en .exe
-    """
-    # Si on est dans un exe PyInstaller, on cherche le fichier à côté de l'exe
+RANGED_CLASSES = {
+    'Light Bows', 'Bows', 'Greatbows', 'Crossbows', 'Ballistas'
+}
+SHIELD_CLASSES = {
+    'Small Shields', 'Medium Shields', 'Greatshields'
+}
+MAGIC_OBJECT_CLASSES = {'Glintstone Staves', 'Sacred Seals'}
+
+
+def _get_application_path():
     if getattr(sys, 'frozen', False):
-        application_path = os.path.dirname(sys.executable)
-    else:
-        application_path = os.path.dirname(os.path.abspath(__file__))
+        return os.path.dirname(sys.executable)
+    return os.path.dirname(os.path.abspath(__file__))
 
-    chemin_complet = os.path.join(application_path, chemin_fichier)
 
+def _read_csv_file(filename, header=0, names=None):
+    path = os.path.join(_get_application_path(), filename)
     try:
-        df = pd.read_csv(chemin_complet, sep=';', header=1, encoding='utf-8')
-    except UnicodeDecodeError:
-        df = pd.read_csv(chemin_complet, sep=';', header=1, encoding='latin-1')
+        for encoding in ('utf-8', 'latin-1'):
+            try:
+                df = pd.read_csv(path, sep=';', header=header, names=names, encoding=encoding, dtype=str, keep_default_na=False)
+                return df
+            except UnicodeDecodeError:
+                continue
     except FileNotFoundError:
         return None
+    return None
 
-    # --- Nettoyage et extraction ---
 
-    # Armes
-    df_armes = df.iloc[:, [0, 1, 2, 3]].copy()
-    df_armes.columns = ['Class', 'Weapon', 'Dual', '2_Handed']
-    df_armes['Class'] = df_armes['Class'].ffill()
-    df_armes = df_armes.dropna(subset=['Weapon'])
+def _to_yes(value):
+    return str(value).strip().lower() == 'yes'
 
-    # Main Secondaire
-    df_main_sec = df.iloc[:, [5, 6, 7]].copy()
-    df_main_sec.columns = ['Class', 'Object', 'Catalist_bonus']
-    df_main_sec['Class'] = df_main_sec['Class'].ffill()
-    df_main_sec = df_main_sec.dropna(subset=['Object'])
 
-    # Magie
-    df_magie = df.iloc[:, [9, 10, 11, 12]].copy()
-    df_magie.columns = ['Type', 'School', 'Spell', 'Slots']
-    df_magie['Type'] = df_magie['Type'].ffill()
-    df_magie['School'] = df_magie['School'].ffill()
-    df_magie = df_magie.dropna(subset=['Spell'])
-    df_magie['Slots'] = pd.to_numeric(df_magie['Slots'], errors='coerce').fillna(1).astype(int)
+def charger_donnees(_=None):
+    df_main_hand = _read_csv_file('Main Hand.csv', header=0)
+    df_second_hand = _read_csv_file('Second Hand.csv', header=0)
+    df_magic = _read_csv_file('Magic.csv', header=0)
+    df_armor = _read_csv_file('Armor.csv', header=0)
+    df_spirits = _read_csv_file('Spirit.csv', header=None, names=['Spirit'])
+    df_tools = _read_csv_file('Tools.csv', header=None, names=['Tool'])
 
-    # Armures
-    df_armure = df.iloc[:, [14, 15]].copy()
-    df_armure.columns = ['Set', 'Bonus']
-    df_armure = df_armure.dropna(subset=['Set'])
+    if df_main_hand is None or df_second_hand is None or df_magic is None or df_armor is None or df_spirits is None:
+        return None
 
-    # Esprits (Colonne 17)
-    if len(df.columns) > 17:
-        col_spirit = df.columns[17]
-        df_esprits = df[[col_spirit]].copy()
-        df_esprits.columns = ['Spirit']
-        df_esprits = df_esprits.dropna(subset=['Spirit'])
+    df_main_hand.columns = [c.strip() for c in df_main_hand.columns]
+    df_second_hand.columns = [c.strip() for c in df_second_hand.columns]
+    df_magic.columns = [c.strip() for c in df_magic.columns]
+    df_armor.columns = [c.strip() for c in df_armor.columns]
+
+    df_main_hand = df_main_hand.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+    df_second_hand = df_second_hand.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+    df_magic = df_magic.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+    df_armor = df_armor.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+    df_spirits = df_spirits.applymap(lambda x: x.strip() if isinstance(x, str) else x) if not df_spirits.empty else df_spirits
+    df_tools = df_tools.applymap(lambda x: x.strip() if isinstance(x, str) else x) if df_tools is not None else pd.DataFrame(columns=['Tool'])
+
+    df_main_hand = df_main_hand[df_main_hand['leveled'].apply(_to_yes)]
+    df_main_hand = df_main_hand[df_main_hand['Weapon'].astype(bool)].copy()
+    df_main_hand['Dual'] = df_main_hand['Dual'].fillna('No')
+    df_main_hand['2 Handed'] = df_main_hand['2 Handed'].fillna('No')
+
+    df_second_hand = df_second_hand[df_second_hand['leveled'].apply(_to_yes)]
+    df_second_hand = df_second_hand[df_second_hand['Object'].astype(bool)].copy()
+    df_second_hand['Catalist bonus'] = df_second_hand['Catalist bonus'].fillna('')
+
+    df_magic = df_magic[df_magic['Spell'].astype(bool)].copy()
+    df_magic['Slots'] = pd.to_numeric(df_magic['Slots'], errors='coerce').fillna(1).astype(int)
+
+    df_armor = df_armor[df_armor['Name'].astype(bool)].copy()
+    df_armor_sets = df_armor[df_armor['Category'] == 'Armor Sets'].copy()
+    df_armor_pieces = df_armor[df_armor['Category'] == 'Armor Pieces'].copy()
+
+    df_spirits = df_spirits[df_spirits['Spirit'].astype(bool)].copy()
+
+    if df_tools is None:
+        df_tools = pd.DataFrame(columns=['Tool'])
     else:
-        df_esprits = pd.DataFrame({'Spirit': []})
+        df_tools = df_tools[df_tools['Tool'].astype(bool)].copy()
 
-    return df_armes, df_main_sec, df_magie, df_armure, df_esprits
+    return df_main_hand, df_second_hand, df_magic, df_armor_sets, df_armor_pieces, df_spirits, df_tools
+
 
 def generer_build_logique(data):
-    df_armes, df_main_sec, df_magie, df_armure, df_esprits = data
+    df_main_hand, df_second_hand, df_magic, df_armor_sets, df_armor_pieces, df_spirits, df_tools = data
 
     build = {
-        'main_hand': "",
-        'grip': "",
-        'off_hand': "",
-        'armor': "",
+        'main_hand': '',
+        'grip': '',
+        'off_hand': '',
+        'tool': 'Aucun',
+        'armor': '',
         'spells': [],
-        'spirit': "Aucun"
+        'spirit': 'Aucun'
     }
 
-    # --- 1. Arme Principale ---
-    arme = df_armes.sample(n=1).iloc[0]
-    build['main_hand'] = f"{arme['Weapon']}"
+    main_weapon = df_main_hand.sample(n=1).iloc[0]
+    build['main_hand'] = main_weapon['Weapon']
+    main_class = main_weapon['Class']
+    est_double = _to_yes(main_weapon['Dual'])
+    peut_2_mains = _to_yes(main_weapon['2 Handed'])
+    est_carian_sword = main_weapon['Weapon'] == 'Carian Sorcery Sword'
 
-    classe_arme = arme['Class']
-    nom_arme = arme['Weapon']
-    est_double = str(arme['Dual']).strip().lower() == 'yes'
-    peut_2_mains = str(arme['2_Handed']).strip().lower() == 'yes'
-    est_carian_sword = (nom_arme == "Carian Sorcery Sword")
-
-    # --- 2. Gestion Main / Grip ---
+    off_hand_row = None
     mode_tenue = '1-Handed'
-    objet_sec_row = None
-    est_bouclier = False
 
     if est_double:
         mode_tenue = 'Dual Wield'
-        build['off_hand'] = "(Arme Double)"
-    elif peut_2_mains:
-        if random.random() < (2/3):
-            mode_tenue = '2-Handed'
-            build['off_hand'] = "Aucune"
+        build['off_hand'] = '(Arme Double)'
+    elif peut_2_mains and random.random() < 2 / 3:
+        mode_tenue = '2-Handed'
+        build['off_hand'] = 'Aucune'
 
     if mode_tenue == '1-Handed':
-        # 50% Objet / 50% Arme
-        choix_arme = False
-        armes_eligibles = df_armes[
-            (df_armes['Class'] == classe_arme) &
-            (df_armes['Dual'] != 'Yes') &
-            (df_armes['Weapon'] != nom_arme)
-        ]
-
-        if not armes_eligibles.empty and random.random() < 0.5:
-            choix_arme = True
-
-        if choix_arme:
-            arme_sec = armes_eligibles.sample(n=1).iloc[0]
-            build['off_hand'] = f"{arme_sec['Weapon']}"
+        if main_class in RANGED_CLASSES:
+            torches = df_second_hand[df_second_hand['Class'] == 'Torches']
+            if not torches.empty:
+                off_hand_row = torches.sample(n=1).iloc[0]
+                build['off_hand'] = off_hand_row['Object']
+            if not df_tools.empty:
+                build['tool'] = df_tools.sample(n=1).iloc[0]['Tool']
+        elif main_class in SHIELD_CLASSES:
+            choices = df_second_hand[df_second_hand['Class'].isin(MAGIC_OBJECT_CLASSES)]
+            if not choices.empty:
+                off_hand_row = choices.sample(n=1).iloc[0]
+                build['off_hand'] = off_hand_row['Object']
+        elif build['main_hand'] in {'Wakizashi', 'Main Gauche'}:
+            choices = df_second_hand[df_second_hand['Class'].isin(MAGIC_OBJECT_CLASSES)]
+            if not choices.empty:
+                off_hand_row = choices.sample(n=1).iloc[0]
+                build['off_hand'] = off_hand_row['Object']
         else:
-            obj_sec = df_main_sec.sample(n=1).iloc[0]
-            objet_sec_row = obj_sec
-            build['off_hand'] = f"{obj_sec['Object']}"
-            if 'Shield' in str(obj_sec['Class']):
-                est_bouclier = True
+            if random.random() < 0.5:
+                choices = df_second_hand[df_second_hand['Class'].isin(MAGIC_OBJECT_CLASSES)]
+                if not choices.empty:
+                    off_hand_row = choices.sample(n=1).iloc[0]
+                    build['off_hand'] = off_hand_row['Object']
+            else:
+                same_class = df_main_hand[
+                    (df_main_hand['Class'] == main_class) &
+                    (df_main_hand['Weapon'] != main_weapon['Weapon']) &
+                    (~df_main_hand['Dual'].apply(_to_yes))
+                ]
+
+                if main_weapon['Weapon'] == 'Pickaxe':
+                    same_class = df_main_hand[df_main_hand['Class'] == 'Greataxes']
+                elif main_class == 'Daggers':
+                    same_class = same_class[~same_class['Weapon'].isin(['Wakizashi', 'Main Gauche'])]
+
+                if main_class == 'Greataxes':
+                    extra = df_main_hand[df_main_hand['Weapon'] == 'Pickaxe']
+                    same_class = pd.concat([same_class, extra], ignore_index=True).drop_duplicates(subset=['Weapon'])
+                elif main_class == 'Katanas':
+                    extra = df_main_hand[df_main_hand['Weapon'] == 'Wakizashi']
+                    same_class = pd.concat([same_class, extra], ignore_index=True).drop_duplicates(subset=['Weapon'])
+                elif main_class == 'Thrusting Swords':
+                    extra = df_main_hand[df_main_hand['Weapon'] == 'Main Gauche']
+                    same_class = pd.concat([same_class, extra], ignore_index=True).drop_duplicates(subset=['Weapon'])
+
+                if not same_class.empty:
+                    off_hand_row = same_class.sample(n=1).iloc[0]
+                    build['off_hand'] = off_hand_row['Weapon']
+                else:
+                    choices = df_second_hand[df_second_hand['Class'].isin(MAGIC_OBJECT_CLASSES)]
+                    if not choices.empty:
+                        off_hand_row = choices.sample(n=1).iloc[0]
+                        build['off_hand'] = off_hand_row['Object']
 
     build['grip'] = mode_tenue
 
-    # --- 3. Magie ---
     acces_magie = False
-    types_auto = []
-    sources = []
+    accessible_types = []
+    bonus_ecole = None
+    spell_schools = set()
 
-    # A. Identifier les sources potentielles
-    if mode_tenue == '1-Handed' and objet_sec_row is not None:
-        c = objet_sec_row['Class']
-        if c == 'Glintstone Staves': sources.append('Sorceries')
-        elif c == 'Sacred Seals': sources.append('Incantations')
-        elif c == 'Universal Catalist': sources.append('All')
+    if mode_tenue == '1-Handed':
+        if off_hand_row is not None and off_hand_row['Class'] in MAGIC_OBJECT_CLASSES:
+            if off_hand_row['Object'] == 'Staff of the Great Beyond':
+                acces_magie = True
+                accessible_types = None
+            elif off_hand_row['Class'] == 'Glintstone Staves':
+                acces_magie = True
+                accessible_types = ['Sorceries']
+            elif off_hand_row['Class'] == 'Sacred Seals':
+                acces_magie = True
+                accessible_types = ['Incantations']
+            bonus_ecole = off_hand_row['Catalist bonus'] if pd.notna(off_hand_row.get('Catalist bonus', None)) else None
+        if est_carian_sword:
+            acces_magie = True
+            accessible_types = ['Sorceries']
 
-    if est_carian_sword:
-        sources.append('Sorceries')
+    if mode_tenue in {'Dual Wield', '2-Handed'}:
+        acces_magie = False
+        accessible_types = []
 
-    # B. Identifier les blocages
-    blocage_magie = False
-    if mode_tenue == 'Dual Wield':
-        blocage_magie = True
-    elif mode_tenue == '2-Handed' and not est_carian_sword:
-        blocage_magie = True
-    elif est_bouclier and not est_carian_sword:
-        blocage_magie = True
-
-    # C. Résultat
-    if sources and not blocage_magie:
-        acces_magie = True
-        if 'All' in sources:
-            types_auto = ['Sorceries', 'Incantations']
-        else:
-            types_auto = list(set(sources))
-
-    # --- 4. Génération Sorts ---
-    ecoles_possedees = set()
     if acces_magie:
-        pool = df_magie[df_magie['Type'].isin(types_auto)].copy()
-        slots = 10
-        bonus_ecole = objet_sec_row['Catalist_bonus'] if (objet_sec_row is not None and pd.notna(objet_sec_row['Catalist_bonus'])) else None
+        pool = df_magic.copy() if accessible_types is None else df_magic[df_magic['Type'].isin(accessible_types)].copy()
+        remaining_slots = 10
 
-        while slots > 0 and not pool.empty:
-            candidats = pool[pool['Slots'] <= slots].copy()
-            if candidats.empty: break
+        while remaining_slots > 0 and not pool.empty:
+            candidates = pool[pool['Slots'] <= remaining_slots].copy()
+            if candidates.empty:
+                break
 
-            candidats['poids'] = 1.0
+            weights = pd.Series(1.0, index=candidates.index)
             if bonus_ecole:
-                candidats.loc[candidats['School'] == bonus_ecole, 'poids'] = 3.0
+                weights += (candidates['School'] == bonus_ecole).astype(float) * 2.0
 
-            choix = candidats.sample(n=1, weights='poids').iloc[0]
+            choix = candidates.sample(n=1, weights=weights).iloc[0]
             build['spells'].append(f"{choix['Spell']} ({choix['Slots']})")
             if pd.notna(choix['School']):
-                ecoles_possedees.add(choix['School'])
+                spell_schools.add(choix['School'])
 
-            slots -= choix['Slots']
+            remaining_slots -= int(choix['Slots'])
             pool = pool.drop(choix.name)
 
-    # --- 5. Armure ---
-    df_armure['poids'] = 1.0
-    if ecoles_possedees:
-        mask = df_armure['Bonus'].isin(ecoles_possedees)
-        df_armure.loc[mask, 'poids'] = 5.0
+    weight_school = spell_schools
 
-    armure = df_armure.sample(n=1, weights='poids').iloc[0]
-    build['armor'] = armure['Set']
-    if pd.notna(armure['Bonus']):
-        build['armor'] += f" (Bonus: {armure['Bonus']})"
+    if random.random() < 0.9 and not df_armor_sets.empty:
+        armor_pool = df_armor_sets.copy()
+        weights = pd.Series(1.0, index=armor_pool.index)
+        if weight_school:
+            weights += armor_pool['Bonus'].isin(weight_school).astype(float) * 4.0
+        armor_choice = armor_pool.sample(n=1, weights=weights).iloc[0]
+        build['armor'] = armor_choice['Name']
+        if pd.notna(armor_choice['Bonus']) and armor_choice['Bonus']:
+            build['armor'] += f" (Bonus: {armor_choice['Bonus']})"
+    else:
+        helms = df_armor_pieces[df_armor_pieces['Type'] == 'Helms'].copy()
+        chests = df_armor_pieces[df_armor_pieces['Type'] == 'Chests Armor'].copy()
+        if helms.empty or chests.empty:
+            armor_pool = df_armor_sets.copy()
+            weights = pd.Series(1.0, index=armor_pool.index)
+            if weight_school:
+                weights += armor_pool['Bonus'].isin(weight_school).astype(float) * 4.0
+            armor_choice = armor_pool.sample(n=1, weights=weights).iloc[0]
+            build['armor'] = armor_choice['Name']
+            if pd.notna(armor_choice['Bonus']) and armor_choice['Bonus']:
+                build['armor'] += f" (Bonus: {armor_choice['Bonus']})"
+        else:
+            helm_weights = pd.Series(1.0, index=helms.index)
+            chest_weights = pd.Series(1.0, index=chests.index)
+            if weight_school:
+                helm_weights += helms['Bonus'].isin(weight_school).astype(float) * 4.0
+                chest_weights += chests['Bonus'].isin(weight_school).astype(float) * 4.0
+            helm_choice = helms.sample(n=1, weights=helm_weights).iloc[0]
+            chest_choice = chests.sample(n=1, weights=chest_weights).iloc[0]
+            armor_text = f"Helm: {helm_choice['Name']}"
+            if pd.notna(helm_choice['Bonus']) and helm_choice['Bonus']:
+                armor_text += f" (Bonus: {helm_choice['Bonus']})"
+            armor_text += f" / Chest: {chest_choice['Name']}"
+            if pd.notna(chest_choice['Bonus']) and chest_choice['Bonus']:
+                armor_text += f" (Bonus: {chest_choice['Bonus']})"
+            build['armor'] = armor_text
 
-    # --- 6. Esprit ---
-    if not df_esprits.empty and random.random() < 0.5:
-        build['spirit'] = df_esprits.sample(n=1).iloc[0]['Spirit']
+    if not df_spirits.empty and random.random() < 0.5:
+        build['spirit'] = df_spirits.sample(n=1).iloc[0]['Spirit']
 
     return build
 
@@ -228,11 +299,10 @@ def main():
     st.markdown("<h1 style='color:#d4af37; font-family:Garamond; text-align:center;'>ELDEN RING</h1>", unsafe_allow_html=True)
     st.markdown("<h3 style='color:#888888; font-family:Garamond; text-align:center;'>RANDOM BUILD GENERATOR</h3>", unsafe_allow_html=True)
 
-    fichier_csv = 'Classeur2.csv'
-    donnees = charger_donnees(fichier_csv)
+    donnees = charger_donnees()
 
     if not donnees:
-        st.error(f"Le fichier '{fichier_csv}' est introuvable. Assurez-vous qu'il est dans le même dossier que l'application.")
+        st.error('Impossible de charger les fichiers de données. Assurez-vous que Main Hand.csv, Second Hand.csv, Magic.csv, Armor.csv, Spirit.csv et Tools.csv sont présents.')
         return
 
     if 'build' not in st.session_state:
@@ -250,6 +320,7 @@ def main():
         st.markdown(f"<b>Main Droite:</b> <span style='color:#eeeeee'>{build['main_hand']}</span>", unsafe_allow_html=True)
         st.markdown(f"<b>Tenue:</b> <span style='color:#eeeeee'>{build['grip']}</span>", unsafe_allow_html=True)
         st.markdown(f"<b>Main Gauche:</b> <span style='color:#eeeeee'>{build['off_hand']}</span>", unsafe_allow_html=True)
+        st.markdown(f"<b>Outil:</b> <span style='color:#eeeeee'>{build['tool']}</span>", unsafe_allow_html=True)
         st.markdown(f"<b>Armure:</b> <span style='color:#eeeeee'>{build['armor']}</span>", unsafe_allow_html=True)
         color_spirit = '#00ff99' if build['spirit'] != 'Aucun' else '#555555'
         st.markdown(f"<b>Esprit:</b> <span style='color:{color_spirit}'>{build['spirit']}</span>", unsafe_allow_html=True)

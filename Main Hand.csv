@@ -1,0 +1,439 @@
+Class;Weapon;Dual;2 Handed;leveled
+Daggers;Misericorde;No;No;Yes
+Daggers;Dagger;No;No;No
+Daggers;Parrying Dagger;No;No;Yes
+Daggers;Great Knife;No;No;Yes
+Daggers;Bloodstained Dagger;No;No;Yes
+Daggers;Erdsteel Dagger;No;No;Yes
+Daggers;Wakizashi;No;No;Yes
+Daggers;Celebrant's Sickle;No;No;No
+Daggers;Ivory Sickle;No;No;No
+Daggers;Crystal Knife;No;No;No
+Daggers;Scorpion's Stinger;No;No;Yes
+Daggers;Cinquedea;No;No;Yes
+Daggers;Glintstone Kris;No;No;Yes
+Daggers;Reduvia;No;No;Yes
+Daggers;Blade of Calling;No;No;Yes
+Daggers;Black Knife;No;No;Yes
+Daggers;Main Gauche;No;No;Yes
+Daggers;Fire Knight's Shortsword;No;No;Yes
+Throwing Blades;Smithscript Dagger;Yes;No;Yes
+Straight Swords;Longsword;No;No;Yes
+Straight Swords;Broadsword;No;No;Yes
+Straight Swords;Lordsworn's Straight Sword;No;No;Yes
+Straight Swords;Warhawk's Talon;No;No;Yes
+Straight Swords;Lazuli Glintstone Sword;No;No;Yes
+Straight Swords;Carian Knight's Sword;No;No;Yes
+Straight Swords;Crystal Sword;No;No;Yes
+Straight Swords;Rotten Crystal Sword;No;No;Yes
+Straight Swords;Miquellan Knight's Sword;No;No;Yes
+Straight Swords;Golden Epitaph;No;No;Yes
+Straight Swords;Sword of St.Trina;No;No;Yes
+Straight Swords;Regalia of Eochaid;No;No;Yes
+Straight Swords;Coded Sword;No;No;Yes
+Straight Swords;Sword of Night and Flame;No;No;Yes
+Straight Swords;Velvet Sword of St.Trina;No;No;Yes
+Straight Swords;Stone-Sheathed Sword;No;No;No
+Straight Swords;Short Sword;No;No;No
+Straight Swords;Weathered Straight Sword;No;No;No
+Straight Swords;Noble's Slender Sword;No;No;Yes
+Straight Swords;Cane Sword;No;No;No
+Straight Swords;Sword of Light;No;No;Yes
+Straight Swords;Sword of Darkness;No;No;Yes
+Light Greatswords;Milady;No;Yes;Yes
+Light Greatswords;Leda's Sword;No;Yes;Yes
+Light Greatswords;Rellana's Twin Blades;Yes;No;Yes
+Greatswords;Bastard Sword;No;Yes;Yes
+Greatswords;Claymore;No;Yes;Yes
+Greatswords;Iron Greatsword;No;Yes;Yes
+Greatswords;Lordsworn's Greatsword;No;Yes;Yes
+Greatswords;Knight's Greatsword;No;Yes;Yes
+Greatswords;Banished Knight's Greatsword;No;Yes;Yes
+Greatswords;Flamberge;No;Yes;Yes
+Greatswords;Gargoyle's Greatsword;No;Yes;Yes
+Greatswords;Gargoyle's Blackblade;No;Yes;Yes
+Greatswords;Inseparable Sword;No;Yes;Yes
+Greatswords;Sword of Milos;No;Yes;Yes
+Greatswords;Marais Executioner's Sword;No;Yes;Yes
+Greatswords;Ordovis's Greatsword;No;Yes;Yes
+Greatswords;Alabaster Lord's Sword;No;Yes;Yes
+Greatswords;Death's Poker;No;Yes;Yes
+Greatswords;Helphen's Steeple;No;Yes;Yes
+Greatswords;Blasphemous Blade;No;Yes;Yes
+Greatswords;Golden Order Greatsword;No;Yes;Yes
+Greatswords;Dark Moon Greatsword;No;Yes;Yes
+Greatswords;Sacred Relic Sword;No;Yes;Yes
+Greatswords;Lizard Greatsword;No;No;No
+Greatswords;Forked Greatsword;No;No;Yes
+Greatswords;Greatsword of Damnation;No;Yes;Yes
+Greatswords;Greatsword of Solitude;No;Yes;Yes
+Colossal Swords;Zweihander;No;Yes;Yes
+Colossal Swords;Greatsword;No;Yes;Yes
+Colossal Swords;Watchdog's Greatsword;No;Yes;Yes
+Colossal Swords;Troll's Golden Sword;No;Yes;Yes
+Colossal Swords;Troll Knight's Sword;No;Yes;Yes
+Colossal Swords;Royal Greatsword;No;Yes;Yes
+Colossal Swords;Grafted Blade Greatsword;No;Yes;Yes
+Colossal Swords;Ruins Greatsword;No;Yes;Yes
+Colossal Swords;Starscourge Greatsword;Yes;No;Yes
+Colossal Swords;Godslayer's Greatsword;No;Yes;Yes
+Colossal Swords;Maliketh's Black Blade;No;Yes;Yes
+Colossal Swords;Fire Knight's Greatsword;No;Yes;Yes
+Colossal Swords;Ancient Meteoric Ore Greatsword;No;Yes;Yes
+Colossal Swords;Moonrithyll's Knight Sword;No;Yes;Yes
+Colossal Swords;Greatsword of Radahn (Lord);Yes;No;Yes
+Colossal Swords;Greatsword of Radahn (Light);Yes;No;Yes
+Thrusting Swords;Rapier;No;No;Yes
+Thrusting Swords;Estoc;No;No;Yes
+Thrusting Swords;Noble's Estoc;No;No;Yes
+Thrusting Swords;Cleanrot Knight's Sword;No;No;Yes
+Thrusting Swords;Rogier's Rapier;No;No;Yes
+Thrusting Swords;Antspur Rapier;Yes;No;Yes
+Thrusting Swords;Frozen Needle;No;No;Yes
+Thrusting Swords;Carian Sorcery Sword;No;No;Yes
+Heavy Thrusting Swords;Great Epee;No;Yes;Yes
+Heavy Thrusting Swords;Godskin Stitcher;No;Yes;Yes
+Heavy Thrusting Swords;Bloody Helice;No;Yes;Yes
+Heavy Thrusting Swords;Dragon King's Cragblade;No;Yes;Yes
+Heavy Thrusting Swords;Sword Lance;No;Yes;Yes
+Heavy Thrusting Swords;Queelign's Greatsword;No;Yes;Yes
+Curved Swords;Scimitar;No;No;Yes
+Curved Swords;Falchion;No;No;Yes
+Curved Swords;Shamshir;No;No;Yes
+Curved Swords;Grossmesser;No;No;Yes
+Curved Swords;Bandit's Curved Sword;No;No;Yes
+Curved Swords;Scavenger's Curved Sword;Yes;No;Yes
+Curved Swords;Beastman's Curved Sword;No;No;Yes
+Curved Swords;Magma Blade;No;No;Yes
+Curved Swords;Nox Flowing Sword;No;No;Yes
+Curved Swords;Wing of Astel;No;No;Yes
+Curved Swords;Eclipse Shotel;No;No;Yes
+Curved Swords;Shotel;No;No;No
+Curved Swords;Mantis Blade;No;No;No
+Curved Swords;Flowing Curved Sword;No;No;No
+Curved Swords;Serpent-God's Curved Sword;No;No;No
+Curved Swords;Spirit Sword;No;No;Yes
+Curved Swords;Falx;Yes;No;Yes
+Curved Swords;Dancing Blade of Ranah;Yes;No;Yes
+Curved Swords;Horned Warrior's Sword;Yes;No;Yes
+Curved Greatswords;Dismounter;No;Yes;Yes
+Curved Greatswords;Omen Cleaver;No;Yes;Yes
+Curved Greatswords;Monk's Flameblade;No;Yes;Yes
+Curved Greatswords;Beastman's Cleaver;No;Yes;Yes
+Curved Greatswords;Bloodhound's Fang;No;Yes;Yes
+Curved Greatswords;Onyx Lord's Greatsword;No;Yes;Yes
+Curved Greatswords;Zamor Curved Sword;No;Yes;Yes
+Curved Greatswords;Magma Wyrm's Scalesword;No;Yes;Yes
+Curved Greatswords;Morgott's Curved Sword;No;Yes;Yes
+Curved Greatswords;Horned Warrior's Greatsword;No;Yes;Yes
+Curved Greatswords;Freyja's Greatsword;No;Yes;Yes
+Backhand Blades;Backhand Blade;Yes;No;Yes
+Backhand Blades;Smithscript Cirque;Yes;No;Yes
+Backhand Blades;Curseblade's Cirque;Yes;No;Yes
+Katanas;Uchigatana;No;Yes;Yes
+Katanas;Nagakiba;No;Yes;Yes
+Katanas;Serpentbone Blade;No;Yes;Yes
+Katanas;Meteoric Ore Blade;No;Yes;Yes
+Katanas;Moonveil;No;Yes;Yes
+Katanas;Rivers of Blood;No;Yes;Yes
+Katanas;Dragonscale Blade;No;Yes;Yes
+Katanas;Hand of Malenia;No;Yes;Yes
+Katanas;Star-Lined Sword;No;Yes;Yes
+Katanas;Sword of Night;No;Yes;Yes
+Great Katanas;Great Katana;No;Yes;Yes
+Great Katanas;Dragon-Hunter's Great Katana;No;Yes;Yes
+Great Katanas;Rakshasa's Great Katana;No;Yes;Yes
+Twinblades;Twinblade;No;Yes;Yes
+Twinblades;Twinned Knight Swords;No;Yes;Yes
+Twinblades;Godskin Peeler;No;Yes;Yes
+Twinblades;Gargoyle's Twinblade;No;Yes;Yes
+Twinblades;Gargoyle's Black Blades;No;Yes;No
+Twinblades;Eleonora's Poleblade;No;Yes;Yes
+Twinblades;Black Steel Twinblade;No;Yes;Yes
+Twinblades;Euporia;No;Yes;Yes
+Axes;Battle Axe;No;No;Yes
+Axes;Warped Axe;No;No;Yes
+Axes;Iron Cleaver;No;No;Yes
+Axes;Highland Axe;No;No;Yes
+Axes;Icerind Hatchet;No;No;Yes
+Axes;Ripple Blade;No;No;Yes
+Axes;Stormhawk Axe;No;No;Yes
+Axes;Rosus' Axe;No;No;Yes
+Axes;Forked-Tongue Hatchet;No;No;No
+Axes;Hand Axe;No;No;No
+Axes;Forked Hatchet;No;No;No
+Axes;Jawbone Axe;No;No;No
+Axes;Celebrant's Cleaver;No;No;No
+Axes;Sacrificial Axe;No;No;No
+Axes;Smithscript Axe;No;No;Yes
+Axes;Messmer Soldier's Axe;No;No;Yes
+Axes;Death Knight's Twin Axes;Yes;No;Yes
+Greataxes;Greataxe;No;Yes;Yes
+Greataxes;Crescent Moon Axe;No;Yes;Yes
+Greataxes;Longhaft Axe;No;Yes;Yes
+Greataxes;Executioner's Greataxe;No;Yes;Yes
+Greataxes;Great Omenkiller Cleaver;Yes;No;Yes
+Greataxes;Rusted Anchor;No;Yes;Yes
+Greataxes;Butchering Knife;No;Yes;Yes
+Greataxes;Gargoyles's Great Axe;No;Yes;No
+Greataxes;Gargoyles's Black Axe;No;Yes;No
+Greataxes;Winged Greathorn;No;Yes;Yes
+Greataxes;Axe of Godrick;No;Yes;Yes
+Greataxes;Putrescence Cleaver;No;Yes;Yes
+Greataxes;Death Knight's Longhaft Axe;No;Yes;Yes
+Greataxes;Bonny Butchering Knife;No;Yes;Yes
+Hammers;Spiked Club;No;No;Yes
+Hammers;Club;No;No;Yes
+Hammers;Curved Club;No;No;No
+Hammers;Stone Club;No;No;Yes
+Hammers;Mace;No;No;Yes
+Hammers;Morning Star;No;No;Yes
+Hammers;Hammer;No;No;Yes
+Hammers;Warpick;No;No;Yes
+Hammers;Varre's Bouquet;No;No;No
+Hammers;Monk's Flamemace;No;No;Yes
+Hammers;Envoy's Horn;No;No;Yes
+Hammers;Nox Flowing Hammer;No;No;Yes
+Hammers;Ringed Finger;No;No;Yes
+Hammers;Scepter of the All-Knowing;No;No;Yes
+Hammers;Marika's Hammer;No;No;Yes
+Hammers;Flowerstone Gavel;No;No;Yes
+Flails;Flail;No;No;No
+Flails;Nightrider Flail;No;No;Yes
+Flails;Chainlink Flail;No;No;Yes
+Flails;Family Heads;No;No;Yes
+Flails;Bastard's Stars;No;No;Yes
+Flails;Serpent Flail;No;No;Yes
+Great Hammers;Large Club;No;Yes;Yes
+Great Hammers;Curved Great Club;No;Yes;Yes
+Great Hammers;Great Mace;No;Yes;Yes
+Great Hammers;Pickaxe;No;Yes;Yes
+Great Hammers;Brick Hammer;No;Yes;Yes
+Great Hammers;Battle Hammer;No;Yes;Yes
+Great Hammers;Rotten Battle Hammer;No;Yes;Yes
+Great Hammers;Celebrant's Skull;No;Yes;No
+Great Hammers;Great Stars;No;Yes;Yes
+Great Hammers;Greathorn Hammer;No;Yes;Yes
+Great Hammers;Envoy's Long Horn;No;Yes;Yes
+Great Hammers;Cranial Vessel Candlestand;No;Yes;Yes
+Great Hammers;Beastclaw Greathammer;No;Yes;Yes
+Great Hammers;Devourer's Scepter;No;Yes;Yes
+Great Hammers;Black Steel Greathammer;No;Yes;Yes
+Great Hammers;Smithscript Greathammer;No;Yes;Yes
+Colossal Weapons;Duelist Greataxe;No;Yes;Yes
+Colossal Weapons;Rotten Greataxe;No;Yes;Yes
+Colossal Weapons;Golem's Halberd;No;Yes;Yes
+Colossal Weapons;Giant-Crusher;No;Yes;Yes
+Colossal Weapons;Prelate's Inferno Crozier;No;Yes;Yes
+Colossal Weapons;Great Club;No;Yes;Yes
+Colossal Weapons;Dragon Greatclaw;No;Yes;Yes
+Colossal Weapons;Watchdog's Staff;No;Yes;Yes
+Colossal Weapons;Troll's Hammer;No;Yes;Yes
+Colossal Weapons;Staff of the Avatar;No;Yes;Yes
+Colossal Weapons;Rotten Staff;No;Yes;Yes
+Colossal Weapons;Envoy's Greathorn;No;Yes;Yes
+Colossal Weapons;Ghiza's Wheel;No;Yes;Yes
+Colossal Weapons;Fallingstar Beast Jaw;No;Yes;Yes
+Colossal Weapons;Axe of Godfrey;No;Yes;Yes
+Colossal Weapons;Bloodfiend's Arm;No;Yes;Yes
+Colossal Weapons;Anvil Hammer;No;Yes;Yes
+Colossal Weapons;Devonia's Hammer;No;Yes;Yes
+Colossal Weapons;Shadow Sunflower Blossom;No;Yes;Yes
+Colossal Weapons;Gazing Finger;No;Yes;Yes
+Spears;Spear;No;Yes;Yes
+Spears;Partisan;No;Yes;Yes
+Spears;Spiked Spear;No;Yes;Yes
+Spears;Cross-Naginata;Yes;No;Yes
+Spears;Clayman's Harpoon;No;Yes;Yes
+Spears;Inquisitor's Girandole;No;Yes;Yes
+Spears;Crystal Spear;No;Yes;Yes
+Spears;Rotten Crystal Spear;No;Yes;Yes
+Spears;Cleanrot Spear;No;Yes;Yes
+Spears;Death Ritual Spear;No;Yes;Yes
+Spears;Bolt of Gransax;No;Yes;Yes
+Spears;Short Spear;No;Yes;Yes
+Spears;Iron Spear;No;Yes;No
+Spears;Pike;No;Yes;Yes
+Spears;Celebrant's Rib-Rake;No;Yes;No
+Spears;Torchpole;No;Yes;No
+Spears;Smithscript Spear;No;Yes;Yes
+Spears;Swift Spear;No;Yes;Yes
+Spears;Bloodfiend's Fork;No;Yes;Yes
+Great Spears;Lance;No;Yes;Yes
+Great Spears;Treespear;No;Yes;Yes
+Great Spears;Siluria's Tree;No;Yes;Yes
+Great Spears;Vyke's War Spear;No;Yes;Yes
+Great Spears;Mohgwyn's Sacred Spear;No;Yes;Yes
+Great Spears;Bloodfiend's Sacred Spear;No;Yes;No
+Great Spears;Serpent-Hunter;No;Yes;No
+Great Spears;Messmer Soldier's Spear;No;Yes;Yes
+Great Spears;Spear of the Impaler;No;Yes;Yes
+Great Spears;Barbed Staff-Spear;No;Yes;Yes
+Halberds;Halberd;No;Yes;Yes
+Halberds;Banished Knight's Halberd;No;Yes;Yes
+Halberds;Lucerne;No;Yes;Yes
+Halberds;Glaive;No;Yes;Yes
+Halberds;Vulgar Militia Saw;No;Yes;Yes
+Halberds;Guardian's Swordspear;No;Yes;Yes
+Halberds;Nightrider Glaive;No;Yes;Yes
+Halberds;Ripple Crescent Halberd;No;Yes;Yes
+Halberds;Golden Halberd;No;Yes;Yes
+Halberds;Dragon Halberd;No;Yes;Yes
+Halberds;Loretta's War Sickle;No;Yes;Yes
+Halberds;Commander's Standard;No;Yes;Yes
+Halberds;Vulgar Militia Shotel;No;Yes;No
+Halberds;Pest's Glaive;No;Yes;No
+Halberds;Gargoyles's Halberd;No;Yes;Yes
+Halberds;Gargoyle's Black Halberd;No;Yes;No
+Halberds;Spirit Glaive;No;Yes;Yes
+Halberds;Poleblade of the Bud;No;Yes;Yes
+Reapers;Scythe;No;Yes;Yes
+Reapers;Grave Scythe;No;Yes;Yes
+Reapers;Halo Scythe;No;Yes;Yes
+Reapers;Winged Scythe;No;Yes;Yes
+Reapers;Obsidian Lamina;No;Yes;Yes
+Whips;Thorned Whip;No;No;Yes
+Whips;Urumi;No;No;Yes
+Whips;Hoslow's Petal Whip;No;No;Yes
+Whips;Magma Whip Candlestick;No;No;Yes
+Whips;Giant's Red Braid;No;No;Yes
+Whips;Whip;No;No;No
+Whips;Tooth Whip;No;No;Yes
+Fists;Caestus;Yes;No;No
+Fists;Spiked Caestus;Yes;No;Yes
+Fists;Katar;Yes;No;Yes
+Fists;Iron Ball;Yes;No;Yes
+Fists;Star Fist;Yes;No;Yes
+Fists;Clinging Bone;Yes;No;Yes
+Fists;Veteran's Prosthesis;Yes;No;Yes
+Fists;Cipher Pata;Yes;No;Yes
+Fists;Grafted Dragon;No;No;Yes
+Fists;Pata;Yes;No;Yes
+Fists;Golem Fist;Yes;No;Yes
+Fists;Thiollier's Hidden Needle;Yes;No;Yes
+Fists;Poisned Hand;Yes;No;Yes
+Fists;Madding Hand;Yes;No;Yes
+Hand-to-Hand Arts;Dryleaf Arts;Yes;No;Yes
+Hand-to-Hand Arts;Dane's Footwork;Yes;No;Yes
+Claws;Hookclaws;Yes;No;Yes
+Claws;Bloodhound Claws;Yes;No;Yes
+Claws;Venomous Fang;Yes;No;Yes
+Claws;Raptor Talons;Yes;No;Yes
+Claws;Claws of Night;Yes;No;Yes
+Beast Claws;Beast Claw;Yes;No;Yes
+Beast Claws;Red Bear's Claw;Yes;No;Yes
+Perfume Bottles;Chilling Perfume Bottle;Yes;No;Yes
+Perfume Bottles;Firespark Perfume Bottle;Yes;No;No
+Perfume Bottles;Lightning Perfume Bottle;Yes;No;No
+Perfume Bottles;Frenzyflame Perfume Bottle;Yes;No;Yes
+Perfume Bottles;Deadly Poison Perfume Bottle;Yes;No;Yes
+Thrusting Shields;Dueling Shield;Yes;Yes;Yes
+Thrusting Shields;Carian Thrusting Shield;Yes;Yes;Yes
+Light Bows;Bone Bow;No;No;Yes
+Light Bows;Shortbow;No;No;No
+Light Bows;Composite Bow;No;No;Yes
+Light Bows;Red Branch Shortbow;No;No;No
+Light Bows;Misbegotten Shortbow;No;No;No
+Light Bows;Harp Bow;No;No;No
+Bows;Ansbach's Longbow;No;No;Yes
+Bows;Albinauric Bow;No;No;Yes
+Bows;Black Bow;No;No;No
+Bows;Pulley Bow;No;No;No
+Bows;Horn Bow;No;No;Yes
+Bows;Serpent Bow;No;No;No
+Bows;Erdtree Bow;No;No;No
+Bows;Longbow;No;No;No
+Greatbows;Erdtree Greatbow;No;No;No
+Greatbows;Golem Greatbow;No;No;Yes
+Greatbows;Greatbow;No;No;No
+Greatbows;Igon's Greatbow;No;No;Yes
+Greatbows;Lion Greatbow;No;No;Yes
+Crossbows;Repeating Crossbow;No;No;Yes
+Crossbows;Spread Crossbow;No;No;No
+Crossbows;Soldier's Crossbow;No;No;No
+Crossbows;Light Crossbow;No;No;No
+Crossbows;Heavy Crossbow;No;No;No
+Crossbows;Arbalest;No;No;No
+Crossbows;Crepus's Black-Key Crossbow;No;No;Yes
+Crossbows;Pulley Crossbow;No;No;Yes
+Crossbows;Full Moon Crossbow;No;No;No
+Ballistas;Hand Ballista;No;No;No
+Ballistas;Jar Cannon;No;No;No
+Ballistas;Rabbath's Cannon;No;No;Yes
+Small Shields;Coil Shield;No;No;Yes
+Small Shields;Smithscript Shield;No;No;Yes
+Small Shields;Rickety Shield;No;No;No
+Small Shields;Riveted Wooden Shield;No;No;No
+Small Shields;Blue-White Wooden Shield;No;No;No
+Small Shields;Scripture Wooden Shield;No;No;No
+Small Shields;Red Thorn Roundshield;No;No;No
+Small Shields;Pillory Shield;No;No;No
+Small Shields;Buckler;No;No;No
+Small Shields;Iron Roundshield;No;No;No
+Small Shields;Gilded Iron Shield;No;No;No
+Small Shields;Man-Serpent's Shield;No;No;No
+Small Shields;Ice Crest Shield;No;No;No
+Small Shields;Rift Shield;No;No;No
+Small Shields;Perfumer's Shield;No;No;No
+Small Shields;Shield of the Guilty;No;No;No
+Small Shields;Spiralhorn Shield;No;No;No
+Small Shields;Smoldering Shield;No;No;No
+Small Shields;Shield of Night;No;No;Yes
+Medium Shields;Hawk Crest Wooden shield;No;No;No
+Medium Shields;Horse Crest Wooden Shield;No;No;No
+Medium Shields;Candletree Wooden Shield;No;No;No
+Medium Shields;Flame Crest Wooden Shield;No;No;No
+Medium Shields;Marred Wooden Shield;No;No;No
+Medium Shields;Sun Realm Shield;No;No;No
+Medium Shields;Round Shield;No;No;No
+Medium Shields;Large Leather Shield;No;No;No
+Medium Shields;Black Leather Shield;No;No;No
+Medium Shields;Marred Leather Shield;No;No;No
+Medium Shields;Heater Shield;No;No;No
+Medium Shields;Blue Crest Heater Shield;No;No;No
+Medium Shields;Red Crest Heater Shield;No;No;No
+Medium Shields;Beast Crest Heater Shield;No;No;No
+Medium Shields;Inverted Hawk Heater Shield;No;No;No
+Medium Shields;Eclipse Crest Heater Shield;No;No;No
+Medium Shields;Kite Shield;No;No;No
+Medium Shields;Blue-Gold Kite Shield;No;No;No
+Medium Shields;Scorpion Kite Shield;No;No;No
+Medium Shields;Twinbird Kite Shield;No;No;No
+Medium Shields;Messmer Soldier Shield;No;No;No
+Medium Shields;Wolf Crest Shield;No;No;No
+Medium Shields;Serpent Crest Shield;No;No;Yes
+Medium Shields;Albinauric Shield;No;No;No
+Medium Shields;Beastman's Jar-Shield;No;No;No
+Medium Shields;Carian Knight's Shield;No;No;No
+Medium Shields;Great Turtle Shell;No;No;No
+Medium Shields;Golden Lion Shield;No;No;Yes
+Medium Shields;Brass Shield;No;No;Yes
+Medium Shields;Banished Knight's Shield;No;No;Yes
+Medium Shields;Silver Mirrorshield;No;No;Yes
+Greatshields;Fingerprint Stone Shield;No;No;Yes
+Greatshields;Erdtree Greatshield;No;No;Yes
+Greatshields;Wooden Greatshield;No;No;No
+Greatshields;Lordsworn's Shield;No;No;No
+Greatshields;Briar Greatshield;No;No;No
+Greatshields;Spiked Palisade Shield;No;No;Yes
+Greatshields;Icon Shield;No;No;No
+Greatshields;Golden Beast Crest Shield;No;No;No
+Greatshields;Manor Towershield;No;No;No
+Greatshields;Crossed-Tree Towershield;No;No;No
+Greatshields;Inverted Hawk Towershield;No;No;No
+Greatshields;Dragon Towershield;No;No;No
+Greatshields;Distinguished Greatshield;No;No;No
+Greatshields;Gilded Greatshield;No;No;No
+Greatshields;Cuckoo Greatshield;No;No;No
+Greatshields;Redmane Greatshield;No;No;No
+Greatshields;Golden Greatshield;No;No;No
+Greatshields;Haligtree Crest Greatshield;No;No;Yes
+Greatshields;Black Steel Greatshield;No;No;No
+Greatshields;Crucible Hornshield;No;No;No
+Greatshields;Dragonclaw Shield;No;No;No
+Greatshields;Eclipse Crest Greatshield;No;No;No
+Greatshields;Ant's Skull Plate;No;No;No
+Greatshields;Jellyfish Shield;No;No;No
+Greatshields;Visage Shield;No;No;Yes
+Greatshields;One-Eyed Shield;No;No;Yes
+Greatshields;Verdigris Greatshield;No;No;Yes
