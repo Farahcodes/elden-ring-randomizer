@@ -205,6 +205,7 @@ def generer_build_logique(data):
 
     if acces_magie:
         pool = df_magic.copy() if accessible_types is None else df_magic[df_magic['Type'].isin(accessible_types)].copy()
+        pool['Slots'] = pd.to_numeric(pool['Slots'], errors='coerce').fillna(1).astype(int)
         remaining_slots = 10
 
         while remaining_slots > 0 and not pool.empty:
