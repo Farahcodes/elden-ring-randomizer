@@ -77,9 +77,21 @@ def charger_donnees(_=None):
     df_magic = df_magic[df_magic['Spell'].astype(bool)].copy()
     df_magic['Slots'] = pd.to_numeric(df_magic['Slots'], errors='coerce').fillna(1).astype(int)
 
-    df_armor = df_armor[df_armor['Name'].astype(bool)].copy()
-    df_armor_sets = df_armor[df_armor['Category'] == 'Armor Sets'].copy()
-    df_armor_pieces = df_armor[df_armor['Category'] == 'Armor Pieces'].copy()
+    # Armor CSVs may use different column name capitalizations: prefer the columns that exist
+    # Determine the columns for name, category/type and bonus
+    armor_name_col = 'Name' if 'Name' in df_armor.columns else ('name' if 'name' in df_armor.columns else None)
+    armor_category_col = 'Category' if 'Category' in df_armor.columns else ('Type' if 'Type' in df_armor.columns else None)
+    armor_class_col = 'Class' if 'Class' in df_armor.columns else ('class' if 'class' in df_armor.columns else None)
+    armor_bonus_col = 'Bonus' if 'Bonus' in df_armor.columns else ('bonus' if 'bonus' in df_armor.columns else None)
+
+    if armor_name_col is None or armor_category_col is None:
+        # fallback: return empty frames so rest of logic behaves gracefully
+        df_armor_sets = pd.DataFrame(columns=[armor_name_col or 'Name', armor_category_col or 'Category', armor_class_col or 'Class', armor_bonus_col or 'Bonus'])
+        df_armor_pieces = pd.DataFrame(columns=[armor_name_col or 'Name', armor_category_col or 'Category', armor_class_col or 'Class', armor_bonus_col or 'Bonus'])
+    else:
+        df_armor = df_armor[df_armor[armor_name_col].astype(bool)].copy()
+        df_armor_sets = df_armor[df_armor[armor_category_col] == 'Armor Sets'].copy()
+        df_armor_pieces = df_armor[df_armor[armor_category_col] == 'Armor Pieces'].copy()
 
     df_spirits = df_spirits[df_spirits['Spirit'].astype(bool)].copy()
 
@@ -103,6 +115,20 @@ def generer_build_logique(data):
         'spells': [],
         'spirit': 'Aucun'
     }
+
+    # Determine armor column names (the input DataFrames may use different headers)
+    def _detect_col(dfs, candidates):
+        for df in dfs:
+            if df is None or df.empty:
+                continue
+            for c in candidates:
+                if c in df.columns:
+                    return c
+        return None
+
+    armor_name_col = _detect_col([df_armor_sets, df_armor_pieces], ['Name', 'name'])
+    armor_bonus_col = _detect_col([df_armor_sets, df_armor_pieces], ['Bonus', 'bonus'])
+    armor_class_col = _detect_col([df_armor_sets, df_armor_pieces], ['Class', 'class'])
 
     main_weapon = df_main_hand.sample(n=1).iloc[0]
     build['main_hand'] = main_weapon['Weapon']
@@ -230,38 +256,40 @@ def generer_build_logique(data):
     if random.random() < 0.9 and not df_armor_sets.empty:
         armor_pool = df_armor_sets.copy()
         weights = pd.Series(1.0, index=armor_pool.index)
-        if weight_school:
-            weights += armor_pool['Bonus'].isin(weight_school).astype(float) * 4.0
+        if weight_school and armor_bonus_col in armor_pool.columns:
+            weights += armor_pool[armor_bonus_col].isin(weight_school).astype(float) * 4.0
         armor_choice = armor_pool.sample(n=1, weights=weights).iloc[0]
-        build['armor'] = armor_choice['Name']
-        if pd.notna(armor_choice['Bonus']) and armor_choice['Bonus']:
-            build['armor'] += f" (Bonus: {armor_choice['Bonus']})"
+        build['armor'] = armor_choice[armor_name_col]
+        if armor_bonus_col in armor_choice.index and pd.notna(armor_choice.get(armor_bonus_col, None)) and armor_choice.get(armor_bonus_col, None):
+            build['armor'] += f" (Bonus: {armor_choice.get(armor_bonus_col)})"
     else:
-        helms = df_armor_pieces[df_armor_pieces['Type'] == 'Helms'].copy()
-        chests = df_armor_pieces[df_armor_pieces['Type'] == 'Chests Armor'].copy()
+        # In armor pieces CSV the class column contains Helms / Chests Armor
+        helms = df_armor_pieces[df_armor_pieces[armor_class_col] == 'Helms'].copy() if armor_class_col in df_armor_pieces.columns else pd.DataFrame()
+        chests = df_armor_pieces[df_armor_pieces[armor_class_col] == 'Chests Armor'].copy() if armor_class_col in df_armor_pieces.columns else pd.DataFrame()
         if helms.empty or chests.empty:
             armor_pool = df_armor_sets.copy()
             weights = pd.Series(1.0, index=armor_pool.index)
-            if weight_school:
-                weights += armor_pool['Bonus'].isin(weight_school).astype(float) * 4.0
+            if weight_school and armor_bonus_col in armor_pool.columns:
+                weights += armor_pool[armor_bonus_col].isin(weight_school).astype(float) * 4.0
             armor_choice = armor_pool.sample(n=1, weights=weights).iloc[0]
-            build['armor'] = armor_choice['Name']
-            if pd.notna(armor_choice['Bonus']) and armor_choice['Bonus']:
-                build['armor'] += f" (Bonus: {armor_choice['Bonus']})"
+            build['armor'] = armor_choice[armor_name_col]
+            if armor_bonus_col in armor_choice.index and pd.notna(armor_choice.get(armor_bonus_col, None)) and armor_choice.get(armor_bonus_col, None):
+                build['armor'] += f" (Bonus: {armor_choice.get(armor_bonus_col)})"
         else:
             helm_weights = pd.Series(1.0, index=helms.index)
             chest_weights = pd.Series(1.0, index=chests.index)
-            if weight_school:
-                helm_weights += helms['Bonus'].isin(weight_school).astype(float) * 4.0
-                chest_weights += chests['Bonus'].isin(weight_school).astype(float) * 4.0
+            if weight_school and armor_bonus_col in helms.columns:
+                helm_weights += helms[armor_bonus_col].isin(weight_school).astype(float) * 4.0
+            if weight_school and armor_bonus_col in chests.columns:
+                chest_weights += chests[armor_bonus_col].isin(weight_school).astype(float) * 4.0
             helm_choice = helms.sample(n=1, weights=helm_weights).iloc[0]
             chest_choice = chests.sample(n=1, weights=chest_weights).iloc[0]
-            armor_text = f"Helm: {helm_choice['Name']}"
-            if pd.notna(helm_choice['Bonus']) and helm_choice['Bonus']:
-                armor_text += f" (Bonus: {helm_choice['Bonus']})"
-            armor_text += f" / Chest: {chest_choice['Name']}"
-            if pd.notna(chest_choice['Bonus']) and chest_choice['Bonus']:
-                armor_text += f" (Bonus: {chest_choice['Bonus']})"
+            armor_text = f"Helm: {helm_choice[armor_name_col]}"
+            if armor_bonus_col in helm_choice.index and pd.notna(helm_choice.get(armor_bonus_col, None)) and helm_choice.get(armor_bonus_col, None):
+                armor_text += f" (Bonus: {helm_choice.get(armor_bonus_col)})"
+            armor_text += f" / Chest: {chest_choice[armor_name_col]}"
+            if armor_bonus_col in chest_choice.index and pd.notna(chest_choice.get(armor_bonus_col, None)) and chest_choice.get(armor_bonus_col, None):
+                armor_text += f" (Bonus: {chest_choice.get(armor_bonus_col)})"
             build['armor'] = armor_text
 
     if not df_spirits.empty and random.random() < 0.5:
