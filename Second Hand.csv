@@ -4,20 +4,20 @@ Glintstone Staves;Lusat's Glintstone Staff;;Yes
 Glintstone Staves;Carian Regal Scepter;Carian;Yes
 Glintstone Staves;Gelmir Glintstone Staff;Magma;Yes
 Glintstone Staves;Prince of Death's Staff;Death;Yes
-Glintstone Staves;Maternal Staff;Finger;No
-Glintstone Staves;Astrologer's Staff;;No
-Glintstone Staves;Glintstone Staff;;No
-Glintstone Staves;Academy Glintstone Staff;;No
-Glintstone Staves;Digger's Staff;Glintstone;No
-Glintstone Staves;Demi-Human Queen's Staff;;No
-Glintstone Staves;Carian Glintstone Staff;Carian;No
-Glintstone Staves;Carian Glintblade Staff;Carian;No
-Glintstone Staves;Albinauric Staff;Thorn;No
-Glintstone Staves;Staff of Loss;Night;No
+Glintstone Staves;Maternal Staff;Finger;Yes
+Glintstone Staves;Astrologer's Staff;;Yes
+Glintstone Staves;Glintstone Staff;;
+Glintstone Staves;Academy Glintstone Staff;;
+Glintstone Staves;Digger's Staff;Glintstone;
+Glintstone Staves;Demi-Human Queen's Staff;;
+Glintstone Staves;Carian Glintstone Staff;Carian;
+Glintstone Staves;Carian Glintblade Staff;Carian;Yes
+Glintstone Staves;Albinauric Staff;Thorn;Yes
+Glintstone Staves;Staff of Loss;Night;
 Glintstone Staves;Crystal Staff;Crystalian;Yes
-Glintstone Staves;Rotten Crystal Staff;Crystalian;No
+Glintstone Staves;Rotten Crystal Staff;Crystalian;Yes
 Glintstone Staves;Meteorite Staff;Gravity;Yes
-Glintstone Staves;Staff of the Guilty;Thorn;No
+Glintstone Staves;Staff of the Guilty;Thorn;
 Glintstone Staves;Staff of the Great Beyond;;Yes
 Sacred Seals;Erdtree Seal;;Yes
 Sacred Seals;Golden Order Seal;Golden Order;Yes
@@ -25,17 +25,17 @@ Sacred Seals;Gravel Stone Seal;Dragon Cult;Yes
 Sacred Seals;Giant's Seal;Giant's Flame;Yes
 Sacred Seals;Godslayer's Seal;Black Flame;Yes
 Sacred Seals;Spiraltree Seal;Spiral;Yes
-Sacred Seals;Finger Seal;;No
+Sacred Seals;Finger Seal;;
 Sacred Seals;Clawmark Seal;Bestial;Yes
 Sacred Seals;Frenzied Flame Seal;Frenzied Flame;Yes
 Sacred Seals;Dragon Communion Seal;Dragon Communion;Yes
 Sacred Seals;Dryleaf Seal;Golden Order;Yes
 Sacred Seals;Fire Knight's Seal;Messmer's Flame;Yes
 Torches;Nanaya's Torch;;Yes
-Torches;Lamenting Visage;;No
-Torches;Torch;;No
-Torches;Beast-Repellent Torch;;No
-Torches;Steel-Wire Torch;;No
-Torches;Sentry's Torch;;No
+Torches;Lamenting Visage;;Yes
+Torches;Torch;;
+Torches;Beast-Repellent Torch;;
+Torches;Steel-Wire Torch;;Yes
+Torches;Sentry's Torch;;Yes
 Torches;Ghostflame Torch;;Yes
 Torches;St.Trina's Torch;;Yes
