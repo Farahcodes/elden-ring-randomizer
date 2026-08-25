@@ -140,10 +140,22 @@ def generer_build_logique(data):
     off_hand_row = None
     mode_tenue = '1-Handed'
 
+    def _should_be_two_handed(weapon_row):
+        weapon_class = weapon_row.get('Class')
+        can_two_handed = _to_yes(weapon_row.get('2 Handed'))
+
+        if can_two_handed:
+            return random.random() < 2 / 3
+
+        if weapon_class in RANGED_CLASSES or weapon_class in SHIELD_CLASSES:
+            return False
+
+        return random.random() < 1 / 4
+
     if est_double:
         mode_tenue = 'Dual Wield'
         build['off_hand'] = '(Arme Double)'
-    elif peut_2_mains and random.random() < 2 / 3:
+    elif _should_be_two_handed(main_weapon):
         mode_tenue = '2-Handed'
         build['off_hand'] = 'Aucune'
 

@@ -86,3 +86,38 @@ def test_generer_build_logique_with_carian_sorcery_sword_access_magic(monkeypatc
     assert build['main_hand'] == 'Carian Sorcery Sword'
     assert any('Glintstone Arc' in spell for spell in build['spells'])
     assert build['off_hand'] == 'Glintstone Staff'
+
+
+def test_generer_build_logique_two_handed_rule_for_generic_weapon(monkeypatch):
+    main_hand = make_df(
+        ['Class', 'Weapon', 'Dual', '2 Handed', 'leveled'],
+        [['Greatswords', 'Greatsword', 'No', 'No', 'Yes']]
+    )
+    second_hand = make_df(
+        ['Class', 'Object', 'Catalist bonus', 'leveled'],
+        [['Sacred Seals', 'Golden Order Seal', '', 'Yes']]
+    )
+    magic = make_df(
+        ['Type', 'School', 'Spell', 'Slots'],
+        [['Incantations', 'Golden Order', 'Golden Vow', '1']]
+    )
+    armor_sets = make_df(
+        ['Category', 'Type', 'Name', 'Bonus'],
+        [['Armor Sets', '', 'Raptor Set', 'Golden Order']]
+    )
+    armor_pieces = make_df(
+        ['Category', 'Type', 'Name', 'Bonus'],
+        [['Armor Pieces', 'Helms', 'Raptor Helm', 'Golden Order']]
+    )
+    spirits = make_df(['Spirit'], [['Ancient Dragon']])
+    tools = make_df(['Tool'], [['Bone Arrow']])
+
+    values = iter([0.1, 0.5, 0.9])
+    monkeypatch.setattr(random, 'random', lambda: next(values))
+
+    build = generateur_build.generer_build_logique((main_hand, second_hand, magic, armor_sets, armor_pieces, spirits, tools))
+
+    assert build['grip'] == '2-Handed'
+    assert build['off_hand'] == 'Aucune'
+    assert build['spells'] == []
+    assert build['tool'] == 'Aucun'
